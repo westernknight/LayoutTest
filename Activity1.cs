@@ -75,6 +75,9 @@ namespace LayoutTest
                     }
                 };
 
+           SocketConnection sc = new SocketConnection();
+
+
 
             Console.WriteLine("here");
             listView = FindViewById<ListView>(Resource.Id.listView1);

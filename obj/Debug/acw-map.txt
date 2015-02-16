@@ -1,0 +1,2 @@
+LayoutTest.MyListViewAdapter;layouttest.MyListViewAdapter
+LayoutTest.Activity1;layouttest.Activity1

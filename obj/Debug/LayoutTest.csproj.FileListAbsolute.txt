@@ -1,0 +1,15 @@
+D:\zhangjiajun\studio\新建文件夹\trunk\bin\Debug\LayoutTest.dll
+D:\zhangjiajun\studio\新建文件夹\trunk\bin\Debug\LayoutTest.pdb
+D:\zhangjiajun\studio\新建文件夹\trunk\bin\Debug\LayoutTest.dll.mdb
+D:\zhangjiajun\studio\新建文件夹\trunk\bin\Debug\LayoutTest.LayoutTest.apk
+D:\zhangjiajun\studio\新建文件夹\trunk\bin\Debug\LayoutTest.LayoutTest-Signed.apk
+D:\zhangjiajun\studio\新建文件夹\trunk\obj\Debug\LayoutTest.dll
+D:\zhangjiajun\studio\新建文件夹\trunk\obj\Debug\LayoutTest.pdb
+D:\zhangjiajun\studio\新建文件夹\trunk\obj\Debug\android\bin\LayoutTest.LayoutTest.apk
+D:\zhangjiajun\studio\新建文件夹\trunk\obj\Debug\res\layout\dialog_create.xml
+D:\zhangjiajun\studio\新建文件夹\trunk\obj\Debug\res\layout\layout_row.xml
+D:\zhangjiajun\studio\新建文件夹\trunk\obj\Debug\res\layout\main.xml
+D:\zhangjiajun\studio\新建文件夹\trunk\obj\Debug\res\values\strings.xml
+D:\zhangjiajun\studio\新建文件夹\trunk\obj\Debug\res\drawable\icon.png
+D:\zhangjiajun\studio\新建文件夹\trunk\obj\Debug\R.cs.flag
+D:\zhangjiajun\studio\新建文件夹\trunk\obj\Debug\uploadflags.txt

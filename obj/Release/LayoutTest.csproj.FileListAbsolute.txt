@@ -1,0 +1,14 @@
+D:\zhangjiajun\studio\LayoutTest\trunk\bin\Release\LayoutTest.dll
+D:\zhangjiajun\studio\LayoutTest\trunk\bin\Release\LayoutTest.pdb
+D:\zhangjiajun\studio\LayoutTest\trunk\bin\Release\LayoutTest.LayoutTest.apk
+D:\zhangjiajun\studio\LayoutTest\trunk\bin\Release\LayoutTest.LayoutTest-Signed.apk
+D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\LayoutTest.dll
+D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\LayoutTest.pdb
+D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\android\bin\LayoutTest.LayoutTest.apk
+D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\res\layout\dialog_create.xml
+D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\res\layout\layout_row.xml
+D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\res\layout\main.xml
+D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\res\values\strings.xml
+D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\res\drawable\icon.png
+D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\R.cs.flag
+D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\uploadflags.txt

@@ -23,6 +23,7 @@ namespace LayoutTest
         List<Persion> items = new List<Persion>();
         Button checkConnectButton;
         TextView checkConnectTextView;
+        TextView debugTextView;
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -45,7 +46,7 @@ namespace LayoutTest
             // and attach an event to it
             checkConnectButton = FindViewById<Button>(Resource.Id.button1);
             checkConnectTextView = FindViewById<TextView>(Resource.Id.textView1);
-
+            debugTextView = FindViewById<TextView>(Resource.Id.debugTextView);
 
             checkConnectButton.Click += (sender, e) =>
                 {
@@ -76,8 +77,8 @@ namespace LayoutTest
                 };
 
            SocketConnection sc = new SocketConnection();
-
-
+           sc.msg_callback += (msg) => { debugTextView.Text += msg; };
+           sc.Start();
 
             Console.WriteLine("here");
             listView = FindViewById<ListView>(Resource.Id.listView1);
@@ -94,6 +95,11 @@ namespace LayoutTest
             {
                 NetworkInfo mWifi = connectivityManager.GetNetworkInfo(ConnectivityType.Wifi);
                 if (mWifi.IsConnected)
+                {
+                    return true;
+                }
+                NetworkInfo mMobile = connectivityManager.GetNetworkInfo(ConnectivityType.Mobile);
+                if (mMobile.IsConnected)
                 {
                     return true;
                 }

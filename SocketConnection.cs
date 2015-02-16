@@ -16,6 +16,10 @@ namespace LayoutTest
 
         public SocketConnection()
         {
+            
+        }
+        public void Start()
+        {
             try
             {
                 socketServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);

@@ -63,11 +63,14 @@ namespace LayoutTest
 			// aapt resource value: 0x7f050001
 			public const int button1 = 2131034113;
 			
-			// aapt resource value: 0x7f050005
-			public const int button2 = 2131034117;
-			
 			// aapt resource value: 0x7f050006
-			public const int listView1 = 2131034118;
+			public const int button2 = 2131034118;
+			
+			// aapt resource value: 0x7f050005
+			public const int debugTextView = 2131034117;
+			
+			// aapt resource value: 0x7f050007
+			public const int listView1 = 2131034119;
 			
 			// aapt resource value: 0x7f050003
 			public const int textAge = 2131034115;

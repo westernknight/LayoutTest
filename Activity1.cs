@@ -28,6 +28,12 @@ namespace LayoutTest
         {
             base.OnCreate(bundle);
 
+            ActionBar.SetDisplayShowHomeEnabled(false);
+            ActionBar.SetDisplayShowTitleEnabled(false);
+            ActionBar.SetCustomView(Resource.Layout.action_bar);
+            ActionBar.SetDisplayShowCustomEnabled(true);
+
+
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
@@ -38,7 +44,7 @@ namespace LayoutTest
                 Console.WriteLine("[exception end]===========================================");
             };
 
-            items.Add(new Persion() {name = "jams",age = "22",gender = "man" });
+            items.Add(new Persion() { name = "jams", age = "22", gender = "man" });
             items.Add(new Persion() { name = "mary", age = "22", gender = "lady" });
 
 
@@ -55,7 +61,7 @@ namespace LayoutTest
                         WifiManager wifiManager = (WifiManager)GetSystemService(Service.WifiService);
                         int ip = wifiManager.ConnectionInfo.IpAddress;
 
-                        
+
 
                         IPHostEntry host;
                         string localIP = "?";
@@ -76,16 +82,19 @@ namespace LayoutTest
                     }
                 };
 
-           SocketConnection sc = new SocketConnection();
-           sc.msg_callback += (msg) => { debugTextView.Text += msg; };
-           sc.Start();
+            SocketServer sc = new SocketServer();
+            sc.msg_callback += (msg) => { debugTextView.Text += msg; };
+            sc.Start(5656);
 
-            Console.WriteLine("here");
-            listView = FindViewById<ListView>(Resource.Id.listView1);
-            listView.Adapter = new MyListViewAdapter(this, items);
-            listView.ItemClick += (sender, e) => { Console.WriteLine(e.Position); };
 
-            
+
+
+
+            //listView = FindViewById<ListView>(Resource.Id.listView1);
+            //listView.Adapter = new MyListViewAdapter(this, items);
+            //listView.ItemClick += (sender, e) => { Console.WriteLine(e.Position); };
+
+
         }
 
         bool IsNeworkConnect()

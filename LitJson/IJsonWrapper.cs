@@ -29,7 +29,14 @@ namespace LitJson
         Double,
         Boolean
     }
+    public interface IOrderedDictionary : ICollection, IDictionary, IEnumerable
+    {
+        object this[int idx] { get; set; }
 
+        IDictionaryEnumerator GetEnumerator();
+        void Insert(int idx, object key, object value);
+        void RemoveAt(int idx);
+    }
     public interface IJsonWrapper : IList, IOrderedDictionary
     {
         bool IsArray   { get; }

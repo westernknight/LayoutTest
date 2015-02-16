@@ -9,36 +9,12 @@ namespace LayoutTest
 {
     class SocketConnection
     {
-        Socket socketServer;
-        byte[] tmpData = new byte[1000 * 1024];
+        protected Socket socket;
+        protected byte[] tmpData = new byte[1000 * 1024];
         public Action<string> msg_callback;
-
-
-        public SocketConnection()
-        {
-            
-        }
-        public void Start()
-        {
-            try
-            {
-                socketServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                socketServer.Bind(new IPEndPoint(IPAddress.Any, 5656));
-                socketServer.Listen(int.MaxValue);
-
-                Msg("server on line,wait for connection...");
-            }
-            catch (Exception ex)
-            {
-                Msg(ex);
-            }
-
-            socketServer.BeginAccept((ar) =>
-            {
-                AcceptCallback(ar);
-            }, socketServer);
-        }
-        void Msg(string msg)
+        public Action<string> cmd_callback;
+    
+        protected void Msg(string msg)
         {
             Console.WriteLine(msg);
             if (msg_callback != null)
@@ -47,7 +23,7 @@ namespace LayoutTest
             }
 
         }
-        void Msg(Exception msg)
+        protected void Msg(Exception msg)
         {
             Console.WriteLine(msg);
             if (msg_callback != null)
@@ -57,35 +33,25 @@ namespace LayoutTest
 
         }
 
-
-        public ServerCommand ParseHeader(byte[] raw)
+        public byte[] BuildPack(byte[] a, byte[] b)
         {
-            byte[] packageHeader = new byte[4];
-
-            packageHeader[0] = raw[0];
-            packageHeader[1] = raw[1];
-            packageHeader[2] = raw[2];
-            packageHeader[3] = raw[3];
-            return (ServerCommand)BitConverter.ToInt32(packageHeader, 0);
+            byte[] c = new byte[a.Length + b.Length];
+            Buffer.BlockCopy(a, 0, c, 0, a.Length);
+            Buffer.BlockCopy(b, 0, c, a.Length, b.Length);
+            return c;
         }
-        public byte[] UnPack(byte[] raw)
+  
+
+
+        protected void DealPackage(Socket ts, byte[] body_data)
         {
-            byte[] dest = new byte[raw.Length - 4];
-            Buffer.BlockCopy(raw, 4, dest, 0, raw.Length - 4);
-
-            return dest;
-        }
-
-    
-
-        void DealPackage(Socket ts, byte[] body_data)
-        {
-            CommData dataSave = new CommData() { bodyLength = body_data.Length, bodyData = body_data };
-            switch (ParseHeader(dataSave.bodyData))
+            if (cmd_callback!=null)
             {
+                cmd_callback(Encoding.UTF8.GetString(body_data));
+                
             }
         }
-        void ReceivePackage(Socket ts, int receiveLength, byte[] receiveBuffer, int needBodyLength, byte[] allocBuffer)
+        protected void ReceivePackage(Socket ts, int receiveLength, byte[] receiveBuffer, int needBodyLength, byte[] allocBuffer)
         {
             if (needBodyLength > receiveLength - 4)//不完整包
             {
@@ -140,7 +106,7 @@ namespace LayoutTest
             }
         }
 
-        void VisioPackage(Socket ts, byte[] visioBuffer)
+        protected void VisioPackage(Socket ts, byte[] visioBuffer)
         {
             if (visioBuffer.Length >= 4)//can read package size
             {
@@ -187,7 +153,7 @@ namespace LayoutTest
                 ReceivePackage(ts, receiveBuffer.Length, receiveBuffer, bodyLength, bodyData);
             }
         }
-        void ReceiveCallback(IAsyncResult result)
+        protected void ReceiveCallback(IAsyncResult result)
         {
             try
             {
@@ -218,30 +184,8 @@ namespace LayoutTest
                 Msg(ex);
             }
         }
-
-        private void AcceptCallback(IAsyncResult ar)
-        {
-            try
-            {
-                socketServer.BeginAccept((ar2) =>
-                {
-                    AcceptCallback(ar2);
-
-                }, socketServer);
-
-
-                Socket ts = socketServer.EndAccept(ar);
-                ar.AsyncWaitHandle.Close();
-                Msg("one client has connect");
-
-                ts.BeginReceive(tmpData, 0, tmpData.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), ts);
-
-            }
-            catch (Exception e)
-            {
-                Msg(e);
-            }
-        }
+        
+       
 
     }
 }

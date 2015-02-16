@@ -37,7 +37,7 @@ namespace LayoutTest
                 Console.WriteLine("[exception end]===========================================");
             };
 
-            items.Add(new Persion() {name = "james",age = "22",gender = "man" });
+            items.Add(new Persion() {name = "jams",age = "22",gender = "man" });
             items.Add(new Persion() { name = "mary", age = "22", gender = "lady" });
 
 

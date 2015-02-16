@@ -1,1 +1,1 @@
-D:\zhangjiajun\studio\新建文件夹\trunk\bin\Debug\LayoutTest.dll
+D:\zhangjiajun\studio\LayoutTest\trunk\bin\Debug\LayoutTest.dll

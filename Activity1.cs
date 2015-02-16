@@ -24,6 +24,8 @@ namespace LayoutTest
         Button checkConnectButton;
         TextView checkConnectTextView;
         TextView debugTextView;
+        LinearLayout serverInfo;
+        LinearLayout cardsInfo;
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -53,6 +55,8 @@ namespace LayoutTest
             checkConnectButton = FindViewById<Button>(Resource.Id.button1);
             checkConnectTextView = FindViewById<TextView>(Resource.Id.textView1);
             debugTextView = FindViewById<TextView>(Resource.Id.debugTextView);
+            serverInfo = FindViewById<LinearLayout>(Resource.Id.linearLayout1);
+            cardsInfo = FindViewById<LinearLayout>(Resource.Id.linearLayout2);
 
             checkConnectButton.Click += (sender, e) =>
                 {
@@ -86,9 +90,9 @@ namespace LayoutTest
             sc.msg_callback += (msg) => { debugTextView.Text += msg; };
             sc.Start(5656);
 
+            serverInfo.Click += (sender, e) => { Console.WriteLine("serverInfo"); };
 
-
-
+            cardsInfo.Click += (sender, e) => { Console.WriteLine("cardsInfo"); };
 
             //listView = FindViewById<ListView>(Resource.Id.listView1);
             //listView.Adapter = new MyListViewAdapter(this, items);

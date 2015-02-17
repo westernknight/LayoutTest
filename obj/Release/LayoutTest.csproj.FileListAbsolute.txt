@@ -12,3 +12,7 @@ D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\res\values\strings.xml
 D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\res\drawable\icon.png
 D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\R.cs.flag
 D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\uploadflags.txt
+D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\res\layout\action_bar.xml
+D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\res\drawable\selector.xml
+D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\res\layout\cardslist.xml
+D:\zhangjiajun\studio\LayoutTest\trunk\obj\Release\res\layout\layout1.xml

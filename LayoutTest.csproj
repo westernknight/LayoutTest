@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity1.cs" />
+    <Compile Include="CardsConfig.cs" />
     <Compile Include="CommProtocol.cs" />
     <Compile Include="LitJson\IJsonWrapper.cs" />
     <Compile Include="LitJson\JsonData.cs" />
@@ -66,12 +67,15 @@
     <Compile Include="LitJson\Lexer.cs" />
     <Compile Include="LitJson\ParserToken.cs" />
     <Compile Include="MyListViewAdapter.cs" />
+    <Compile Include="MyScheduleActivity.cs" />
     <Compile Include="Persion.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionsActivity.cs" />
     <Compile Include="SocketClient.cs" />
     <Compile Include="SocketConnection.cs" />
     <Compile Include="SocketServer.cs" />
+    <Compile Include="SpeakersActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -79,6 +83,12 @@
     <AndroidResource Include="Resources\Layout\dialog_create.axml" />
     <AndroidResource Include="Resources\Layout\layout_row.axml" />
     <AndroidResource Include="Resources\Layout\action_bar.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\cardslist.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\layout1.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>

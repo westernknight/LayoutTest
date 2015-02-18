@@ -1,2 +1,5 @@
-LayoutTest.MyListViewAdapter;layouttest.MyListViewAdapter
 LayoutTest.Activity1;layouttest.Activity1
+LayoutTest.MyListViewAdapter;layouttest.MyListViewAdapter
+LayoutTest.MyScheduleActivity;layouttest.MyScheduleActivity
+LayoutTest.SessionsActivity;layouttest.SessionsActivity
+LayoutTest.SpeakersActivity;layouttest.SpeakersActivity

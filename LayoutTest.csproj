@@ -56,7 +56,6 @@
   <ItemGroup>
     <Compile Include="Activity1.cs" />
     <Compile Include="CardsConfig.cs" />
-    <Compile Include="CommProtocol.cs" />
     <Compile Include="LitJson\IJsonWrapper.cs" />
     <Compile Include="LitJson\JsonData.cs" />
     <Compile Include="LitJson\JsonException.cs" />

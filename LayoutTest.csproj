@@ -56,6 +56,8 @@
   <ItemGroup>
     <Compile Include="Activity1.cs" />
     <Compile Include="CardsConfig.cs" />
+    <Compile Include="CardsInfoActivity.cs" />
+    <Compile Include="CardsInfoAdapter.cs" />
     <Compile Include="LitJson\IJsonWrapper.cs" />
     <Compile Include="LitJson\JsonData.cs" />
     <Compile Include="LitJson\JsonException.cs" />
@@ -67,6 +69,8 @@
     <Compile Include="LitJson\ParserToken.cs" />
     <Compile Include="MyListViewAdapter.cs" />
     <Compile Include="MyScheduleActivity.cs" />
+    <Compile Include="OutputActivity.cs" />
+    <Compile Include="OutputAdapter.cs" />
     <Compile Include="Persion.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +92,12 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\layout1.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\console_output.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\cards_info.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>

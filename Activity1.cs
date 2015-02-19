@@ -13,6 +13,9 @@ using Java.Net;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
+using System.ComponentModel;
+using System.Threading;
+
 
 namespace LayoutTest
 {
@@ -26,18 +29,53 @@ namespace LayoutTest
         TextView debugTextView;
         LinearLayout serverInfo;
         LinearLayout cardsInfo;
+        BackgroundWorker checkConnection = new BackgroundWorker();
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            //ActionBar.SetDisplayShowHomeEnabled(false);
-            //ActionBar.SetDisplayShowTitleEnabled(false);
-            //ActionBar.SetCustomView(Resource.Layout.action_bar);
-            //ActionBar.SetDisplayShowCustomEnabled(true);
+            ActionBar.SetDisplayShowHomeEnabled(false);
+            ActionBar.SetDisplayShowTitleEnabled(false);
+            ActionBar.SetCustomView(Resource.Layout.action_bar);
+            ActionBar.SetDisplayShowCustomEnabled(true);
 
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.layout1);
+            TextView ipShow = FindViewById<TextView>(Resource.Id.textView1);
+            ipShow.Text = "wait for wifi connection...";
+            checkConnection.DoWork += (sender, e) => 
+            {
+                while (true)
+                {
+                    if (IsNeworkConnect() == true)
+                    {
+                        IPHostEntry host;
+                        string localIP = "?";
+                        host = Dns.GetHostEntry(Dns.GetHostName());
+                        foreach (IPAddress ipa in host.AddressList)
+                        {
+                            if (ipa.AddressFamily == AddressFamily.InterNetwork)
+                            {
+                                localIP = ipa.ToString();
+
+                            }
+                        }
+                        //ipShow.Text = localIP;
+                        RunOnUiThread(() => { ipShow.Text = localIP; });
+                       
+                    }
+                    else
+                    {
+                        RunOnUiThread(() => { ipShow.Text = "wait for wifi connection..."; });  
+                    }
+                    Thread.Sleep(1000);                    
+                }
+                
+            };
+            checkConnection.RunWorkerAsync();
+
+
 
 
             AndroidEnvironment.UnhandledExceptionRaiser += (sender, args) =>
@@ -50,9 +88,9 @@ namespace LayoutTest
             items.Add(new Persion() { name = "jams", age = "22", gender = "man" });
             items.Add(new Persion() { name = "mary", age = "22", gender = "lady" });
 
-            CreateTab(typeof(MyScheduleActivity), "tag1", "schedule");
+            CreateTab(typeof(CardsInfoActivity), "tag1", "cardsinfo");
             CreateTab(typeof(SessionsActivity), "tag2", "sessions");
-            CreateTab(typeof(SpeakersActivity), "tag3", "seakers");
+            CreateTab(typeof(OutputActivity), "tag3", "Output");
             
             // Get our button from the layout resource,
             // and attach an event to it
@@ -182,7 +220,7 @@ namespace LayoutTest
                 NetworkInfo mMobile = connectivityManager.GetNetworkInfo(ConnectivityType.Mobile);
                 if (mMobile.IsConnected)
                 {
-                    return true;
+                    return false;
                 }
 
             }

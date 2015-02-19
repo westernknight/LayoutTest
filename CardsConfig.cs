@@ -9,7 +9,7 @@ namespace LayoutTest
 {
     class CardsConfig
     {
-        int maxListCount = 10;
+        int maxListCount = 2;
         List<List<string>> cardsPiles = new List<List<string>>();
 
         public CardsConfig(Stream xml)
@@ -47,11 +47,18 @@ namespace LayoutTest
                         XmlElement xe = (XmlElement)cells.Item(j);
                         if ( string.IsNullOrEmpty(xe.GetAttribute("ss:Index"))==false)
                         {
-                            cardsPiles[int.Parse(xe.GetAttribute("ss:Index"))-1].Add(cells[j].InnerText);
+                            if (int.Parse(xe.GetAttribute("ss:Index"))-1<maxListCount)
+                            {
+                                cardsPiles[int.Parse(xe.GetAttribute("ss:Index")) - 1].Add(cells[j].InnerText);
+                            }
+                            
                         }
                         else
                         {
-                            cardsPiles[j].Add(cells[j].InnerText);
+                            if (j < maxListCount)
+                            {
+                                cardsPiles[j].Add(cells[j].InnerText);
+                            }
                         }
                     }
                 }

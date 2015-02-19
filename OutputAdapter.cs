@@ -30,7 +30,7 @@ namespace LayoutTest
             View row = convertView;
             if (row == null)
             {
-                row = LayoutInflater.From(context).Inflate(Resource.Layout.layout_row, null);
+                row = LayoutInflater.From(context).Inflate(Resource.Layout.console_output_row_inflate, null);
             }
             TextView textName = row.FindViewById<TextView>(Resource.Id.textView1);
 

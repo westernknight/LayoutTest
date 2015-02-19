@@ -16,6 +16,9 @@ namespace LayoutTest
     [Activity(Label = "My Activity")]
     public class CardsInfoActivity : Activity
     {
+        public List<string> pileOne = new List<string>();
+        public List<string> pileTwo = new List<string>();
+        public static CardsInfoActivity instance;
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -33,38 +36,26 @@ namespace LayoutTest
                 StartActivityForResult(
                     Intent.CreateChooser(imageIntent, "Select xml"), 0);
             };
+            instance = this;
+
+            //Console.WriteLine(File.ReadAllText(data.Data.Path));
+            //CardsConfig cc = new CardsConfig(File.OpenRead(data.Data.Path));
+            CardsConfig cc = new CardsConfig(File.OpenRead("/storage/emulated/0/kk.xml"));
+            Console.WriteLine(cc.GetPilesCount());
+            Console.WriteLine("GetPilesCount ==============");
+            pileOne = cc.GetPile(0);
+            pileTwo = cc.GetPile(1);
+
 
             ListView listView1 = FindViewById<ListView>(Resource.Id.listView1);
             ListView listView2 = FindViewById<ListView>(Resource.Id.listView2);
 
-            List<string> content = new List<string>();
-            content.Add("a1");
-            content.Add("s1");
+ 
+            listView1.Adapter = new CardsInfoAdapter(this, pileOne);             
+            listView2.Adapter = new CardsInfoAdapter(this, pileTwo);
 
-            content.Add("a1");
-            content.Add("s1");
-            content.Add("a1");
-            content.Add("s1");
-            content.Add("a1");
-            content.Add("a1");
-            content.Add("a1");
-            content.Add("a1");
-            content.Add("a1");
-            content.Add("a1");
-            content.Add("s1");
-            content.Add("a1");
-            content.Add("s1");
-            content.Add("s1");
-            content.Add("s1");
-            content.Add("s1");
-            content.Add("s1");
-            content.Add("s1");
-            ArrayAdapter<string> items = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1, content);
-
-
-
-            listView1.Adapter = new CardsInfoAdapter(this, content);
-
+            //Console.WriteLine(((CardsInfoAdapter)(listView1.Adapter)).GetCardCount());
+            //Console.WriteLine("Checked ==============");
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
@@ -73,10 +64,22 @@ namespace LayoutTest
 
             if (resultCode == Result.Ok)
             {
+               
                 Console.WriteLine(File.ReadAllText(data.Data.Path));
-                CardsConfig cc = new CardsConfig(File.OpenRead(data.Data.Path));
+                //CardsConfig cc = new CardsConfig(File.OpenRead(data.Data.Path));
+                CardsConfig cc = new CardsConfig(File.OpenRead("/storage/emulated/0/kk.xml"));
                 Console.WriteLine(cc.GetPilesCount());
                 Console.WriteLine("GetPilesCount ==============");
+                pileOne = cc.GetPile(0);
+                pileTwo = cc.GetPile(1);
+
+
+                ListView listView1 = FindViewById<ListView>(Resource.Id.listView1);
+                ListView listView2 = FindViewById<ListView>(Resource.Id.listView2);
+
+                listView1.Adapter = new CardsInfoAdapter(this, pileOne);
+                listView2.Adapter = new CardsInfoAdapter(this, pileTwo);
+
             }
         }
     }

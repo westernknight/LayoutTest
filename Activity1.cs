@@ -89,7 +89,8 @@ namespace LayoutTest
             items.Add(new Persion() { name = "mary", age = "22", gender = "lady" });
 
             CreateTab(typeof(CardsInfoActivity), "tag1", "cardsinfo");
-            CreateTab(typeof(SessionsActivity), "tag2", "sessions");
+            CreateTab(typeof(SettingActivity), "tag2", "Setting");
+            CreateTab(typeof(SessionsActivity), "tag3", "Sessions");
             CreateTab(typeof(OutputActivity), "tag3", "Output");
             
             // Get our button from the layout resource,

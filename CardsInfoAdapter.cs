@@ -11,11 +11,17 @@ namespace LayoutTest
     class CardsInfoAdapter : BaseAdapter<string>
     {
         private List<string> items;
+        private Dictionary<int, Switch> switches = new Dictionary<int, Switch>();
         private Context context;
+
         public CardsInfoAdapter(Context context, List<string> items)
         {
             this.items = items;
             this.context = context;
+            for (int i = 0; i < items.Count; i++)
+            {
+
+            }
         }
         public override int Count
         {
@@ -34,11 +40,29 @@ namespace LayoutTest
             View row = convertView;
             if (row == null)
             {
+                //row = LayoutInflater.From(this.context).Inflate(Resource.Layout.cards_info_row_inflate, null, false);
                 row = LayoutInflater.From(this.context).Inflate(Resource.Layout.cards_info_row_inflate, null, false);
             }
-            TextView txt = row.FindViewById<TextView>(Resource.Id.cardsInfoRowInflateTextView1);
-            txt.Text = items[position];
+
+            Switch sw = row.FindViewById<Switch>(Resource.Id.toggleButton1);
+            sw.Text = items[position];
+            if (switches.ContainsKey(position) == false)
+            {
+                switches.Add(position, sw);
+            }           
+            
             return row;
         }
+        public bool GetCardChecked(int id)
+        {
+            if (switches.ContainsKey(id))
+            {
+                return switches[id].Checked;
+            }
+
+            return false;
+
+        }
+
     }
 }

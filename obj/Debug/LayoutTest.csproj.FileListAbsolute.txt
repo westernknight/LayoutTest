@@ -69,3 +69,5 @@ G:\[开发]\LayoutTest\trunk\obj\Debug\res\layout\layout1.xml
 G:\[开发]\LayoutTest\trunk\obj\Debug\res\layout\console_output.xml
 G:\[开发]\LayoutTest\trunk\obj\Debug\res\layout\cards_info.xml
 G:\[开发]\LayoutTest\trunk\obj\Debug\res\layout\cards_info_row_inflate.xml
+G:\[开发]\LayoutTest\trunk\obj\Debug\res\layout\setting.xml
+G:\[开发]\LayoutTest\trunk\obj\Debug\res\layout\console_output_row_inflate.xml

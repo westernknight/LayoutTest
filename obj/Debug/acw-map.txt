@@ -6,4 +6,5 @@ LayoutTest.MyScheduleActivity;layouttest.MyScheduleActivity
 LayoutTest.OutputActivity;layouttest.OutputActivity
 LayoutTest.OutputAdapter;layouttest.OutputAdapter
 LayoutTest.SessionsActivity;layouttest.SessionsActivity
+LayoutTest.SettingActivity;layouttest.SettingActivity
 LayoutTest.SpeakersActivity;layouttest.SpeakersActivity

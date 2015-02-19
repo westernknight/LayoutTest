@@ -69,9 +69,6 @@ namespace LayoutTest
 			// aapt resource value: 0x7f05000d
 			public const int button2 = 2131034125;
 			
-			// aapt resource value: 0x7f050007
-			public const int cardsInfoRowInflateTextView1 = 2131034119;
-			
 			// aapt resource value: 0x7f05000c
 			public const int debugTextView = 2131034124;
 			
@@ -105,6 +102,9 @@ namespace LayoutTest
 			// aapt resource value: 0x7f050003
 			public const int textView2 = 2131034115;
 			
+			// aapt resource value: 0x7f050007
+			public const int toggleButton1 = 2131034119;
+			
 			static Id()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -134,16 +134,22 @@ namespace LayoutTest
 			public const int console_output = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int dialog_create = 2130903045;
+			public const int console_output_row_inflate = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int layout1 = 2130903046;
+			public const int dialog_create = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int layout_row = 2130903047;
+			public const int layout1 = 2130903047;
 			
 			// aapt resource value: 0x7f030008
-			public const int Main = 2130903048;
+			public const int layout_row = 2130903048;
+			
+			// aapt resource value: 0x7f030009
+			public const int Main = 2130903049;
+			
+			// aapt resource value: 0x7f03000a
+			public const int setting = 2130903050;
 			
 			static Layout()
 			{

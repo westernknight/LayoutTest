@@ -5,15 +5,12 @@
     android:layout_height="fill_parent"
     android:minWidth="25px"
     android:minHeight="25px">
-    <Button
-        android:text="开始新游戏"
+    <Switch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button1" />
-    <ListView
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView1" />
+        android:id="@+id/toggleButton1"
+        android:textOn="on"
+        android:textOff="off"
+        android:text="坐标"
+        android:checked="true" />
 </LinearLayout>

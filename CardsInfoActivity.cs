@@ -34,6 +34,37 @@ namespace LayoutTest
                     Intent.CreateChooser(imageIntent, "Select xml"), 0);
             };
 
+            ListView listView1 = FindViewById<ListView>(Resource.Id.listView1);
+            ListView listView2 = FindViewById<ListView>(Resource.Id.listView2);
+
+            List<string> content = new List<string>();
+            content.Add("a1");
+            content.Add("s1");
+
+            content.Add("a1");
+            content.Add("s1");
+            content.Add("a1");
+            content.Add("s1");
+            content.Add("a1");
+            content.Add("a1");
+            content.Add("a1");
+            content.Add("a1");
+            content.Add("a1");
+            content.Add("a1");
+            content.Add("s1");
+            content.Add("a1");
+            content.Add("s1");
+            content.Add("s1");
+            content.Add("s1");
+            content.Add("s1");
+            content.Add("s1");
+            content.Add("s1");
+            ArrayAdapter<string> items = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1, content);
+
+
+
+            listView1.Adapter = new CardsInfoAdapter(this, content);
+
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)

@@ -66,29 +66,38 @@ namespace LayoutTest
 			// aapt resource value: 0x7f050001
 			public const int button1 = 2131034113;
 			
-			// aapt resource value: 0x7f05000a
-			public const int button2 = 2131034122;
+			// aapt resource value: 0x7f05000d
+			public const int button2 = 2131034125;
 			
-			// aapt resource value: 0x7f050009
-			public const int debugTextView = 2131034121;
+			// aapt resource value: 0x7f050007
+			public const int cardsInfoRowInflateTextView1 = 2131034119;
+			
+			// aapt resource value: 0x7f05000c
+			public const int debugTextView = 2131034124;
 			
 			// aapt resource value: 0x7f050002
 			public const int linearLayout1 = 2131034114;
 			
+			// aapt resource value: 0x7f050004
+			public const int linearLayout2 = 2131034116;
+			
 			// aapt resource value: 0x7f050005
 			public const int listView1 = 2131034117;
 			
-			// aapt resource value: 0x7f050004
-			public const int myButton = 2131034116;
-			
-			// aapt resource value: 0x7f050007
-			public const int textAge = 2131034119;
+			// aapt resource value: 0x7f050006
+			public const int listView2 = 2131034118;
 			
 			// aapt resource value: 0x7f050008
-			public const int textGender = 2131034120;
+			public const int myButton = 2131034120;
 			
-			// aapt resource value: 0x7f050006
-			public const int textName = 2131034118;
+			// aapt resource value: 0x7f05000a
+			public const int textAge = 2131034122;
+			
+			// aapt resource value: 0x7f05000b
+			public const int textGender = 2131034123;
+			
+			// aapt resource value: 0x7f050009
+			public const int textName = 2131034121;
 			
 			// aapt resource value: 0x7f050000
 			public const int textView1 = 2131034112;
@@ -116,22 +125,25 @@ namespace LayoutTest
 			public const int cards_info = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int cardslist = 2130903042;
+			public const int cards_info_row_inflate = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int console_output = 2130903043;
+			public const int cardslist = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int dialog_create = 2130903044;
+			public const int console_output = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int layout1 = 2130903045;
+			public const int dialog_create = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int layout_row = 2130903046;
+			public const int layout1 = 2130903046;
 			
 			// aapt resource value: 0x7f030007
-			public const int Main = 2130903047;
+			public const int layout_row = 2130903047;
+			
+			// aapt resource value: 0x7f030008
+			public const int Main = 2130903048;
 			
 			static Layout()
 			{

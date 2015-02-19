@@ -64,3 +64,8 @@ E:\[开发]\LayoutTest\trunk\obj\Debug\res\drawable\icon.png
 E:\[开发]\LayoutTest\trunk\obj\Debug\res\drawable\selector.xml
 E:\[开发]\LayoutTest\trunk\obj\Debug\R.cs.flag
 E:\[开发]\LayoutTest\trunk\obj\Debug\uploadflags.txt
+G:\[开发]\LayoutTest\trunk\obj\Debug\res\layout\cardslist.xml
+G:\[开发]\LayoutTest\trunk\obj\Debug\res\layout\layout1.xml
+G:\[开发]\LayoutTest\trunk\obj\Debug\res\layout\console_output.xml
+G:\[开发]\LayoutTest\trunk\obj\Debug\res\layout\cards_info.xml
+G:\[开发]\LayoutTest\trunk\obj\Debug\res\layout\cards_info_row_inflate.xml

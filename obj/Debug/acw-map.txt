@@ -1,5 +1,9 @@
 LayoutTest.Activity1;layouttest.Activity1
+LayoutTest.CardsInfoActivity;layouttest.CardsInfoActivity
+LayoutTest.CardsInfoAdapter;layouttest.CardsInfoAdapter
 LayoutTest.MyListViewAdapter;layouttest.MyListViewAdapter
 LayoutTest.MyScheduleActivity;layouttest.MyScheduleActivity
+LayoutTest.OutputActivity;layouttest.OutputActivity
+LayoutTest.OutputAdapter;layouttest.OutputAdapter
 LayoutTest.SessionsActivity;layouttest.SessionsActivity
 LayoutTest.SpeakersActivity;layouttest.SpeakersActivity

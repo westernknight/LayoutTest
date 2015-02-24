@@ -16,11 +16,14 @@ namespace LayoutTest
     [Activity(Label = "My Activity")]
     public class CardsInfoActivity : Activity
     {
-        public List<string> pileOne = new List<string>();
-        public List<string> pileTwo = new List<string>();
+        List<string> pileOne = new List<string>();
+        List<string> pileTwo = new List<string>();
+        public ListView listView1;
+        public ListView listView2;
         public static CardsInfoActivity instance;
         protected override void OnCreate(Bundle bundle)
         {
+            instance = this;
             base.OnCreate(bundle);
 
             // Create your application here
@@ -36,7 +39,7 @@ namespace LayoutTest
                 StartActivityForResult(
                     Intent.CreateChooser(imageIntent, "Select xml"), 0);
             };
-            instance = this;
+            
 
             //Console.WriteLine(File.ReadAllText(data.Data.Path));
             //CardsConfig cc = new CardsConfig(File.OpenRead(data.Data.Path));

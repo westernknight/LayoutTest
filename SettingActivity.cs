@@ -21,6 +21,7 @@ namespace LayoutTest
 
             // Create your application here
             SetContentView(Resource.Layout.setting);
+            Console.WriteLine("setting");
         }
     }
 }

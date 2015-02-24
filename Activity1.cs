@@ -15,6 +15,8 @@ using System.Net.Sockets;
 using System.IO;
 using System.ComponentModel;
 using System.Threading;
+using LitJson;
+using System.Collections;
 
 
 namespace LayoutTest
@@ -22,16 +24,13 @@ namespace LayoutTest
     [Activity(Label = "LayoutTest", MainLauncher = true, Icon = "@drawable/icon")]
     public class Activity1 : TabActivity
     {
-        int count = 1;
-        ListView listView;
-        List<Persion> items = new List<Persion>();
-
-        TextView debugTextView;
-        LinearLayout serverInfo;
-        LinearLayout cardsInfo;
+        public static Activity1 instance;
+        public bool gameStart = false;//OutputActivity控制
+        SocketServer sockerServer= new SocketServer();          
         BackgroundWorker checkConnection = new BackgroundWorker();
         protected override void OnCreate(Bundle bundle)
         {
+            instance = this;
             base.OnCreate(bundle);
 
             ActionBar.SetDisplayShowHomeEnabled(false);
@@ -52,6 +51,9 @@ namespace LayoutTest
                     {
                         IPHostEntry host;
                         string localIP = "?";
+                 
+
+
                         host = Dns.GetHostEntry(Dns.GetHostName());
                         foreach (IPAddress ipa in host.AddressList)
                         {
@@ -62,11 +64,12 @@ namespace LayoutTest
                             }
                         }
                         //ipShow.Text = localIP;
-                        RunOnUiThread(() => { ipShow.Text = localIP; });
+                        RunOnUiThread(() => { ipShow.Text = localIP + " (" + sockerServer.socketList.Count+ ")"; });
                        
                     }
                     else
                     {
+                        
                         RunOnUiThread(() => { ipShow.Text = "wait for wifi connection..."; });  
                     }
                     Thread.Sleep(1000);                    
@@ -85,14 +88,14 @@ namespace LayoutTest
                 Console.WriteLine("[exception end]===========================================");
             };
 
-            items.Add(new Persion() { name = "jams", age = "22", gender = "man" });
-            items.Add(new Persion() { name = "mary", age = "22", gender = "lady" });
 
             CreateTab(typeof(CardsInfoActivity), "tag1", "cardsinfo");
-            CreateTab(typeof(SettingActivity), "tag2", "Setting");
+            //CreateTab(typeof(SettingActivity), "tag2", "Setting");
             CreateTab(typeof(SessionsActivity), "tag3", "Sessions");
-            CreateTab(typeof(OutputActivity), "tag3", "Output");
-            
+            CreateTab(typeof(OutputActivity), "tag4", "Output");
+
+            Console.WriteLine("Activity Create");
+           
             // Get our button from the layout resource,
             // and attach an event to it
 
@@ -100,10 +103,7 @@ namespace LayoutTest
             //serverInfo = FindViewById<LinearLayout>(Resource.Id.linearLayout1);
             //cardsInfo = FindViewById<LinearLayout>(Resource.Id.linearLayout2);
 
-
-            //InitServerInfoPage();
-            // SocketServer sc = new SocketServer();            
-            //sc.Start(5656);
+            sockerServer.Start(5656);
 
             //             serverInfo.Click += (sender, e) =>
             //             {
@@ -131,24 +131,7 @@ namespace LayoutTest
 
 
         }
-        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
-        {
-            base.OnActivityResult(requestCode, resultCode, data);
 
-            if (resultCode == Result.Ok)
-            {
-                Console.WriteLine(data.Action);
-                Console.WriteLine("data.Action ==============");
-                Console.WriteLine(data.DataString);
-                Console.WriteLine("data.DataString ==============");
-                Console.WriteLine(data.Data.Path);
-                Console.WriteLine("data.Data.Path ==============");
-                Console.WriteLine(File.ReadAllText(data.Data.Path));
-                CardsConfig cc = new CardsConfig(File.OpenRead(data.Data.Path));
-                Console.WriteLine(cc.GetPilesCount());
-                Console.WriteLine("GetPilesCount ==============");
-            }
-        }
         private void CreateTab(Type activityType, string tag, string label)
         {
             var intent = new Intent(this, activityType);
@@ -160,54 +143,7 @@ namespace LayoutTest
 
             TabHost.AddTab(spec);
         }
-        void InitServerInfoPage()
-        {
-            TextView checkConnectTextView = FindViewById<TextView>(Resource.Id.textView1);
-            Button checkConnectButton = FindViewById<Button>(Resource.Id.button1);
-            checkConnectButton.Click += (sender, e) =>
-            {
-
-                if (IsNeworkConnect())
-                {
-                    WifiManager wifiManager = (WifiManager)GetSystemService(Service.WifiService);
-                    int ip = wifiManager.ConnectionInfo.IpAddress;
-
-
-
-                    IPHostEntry host;
-                    string localIP = "?";
-                    host = Dns.GetHostEntry(Dns.GetHostName());
-                    foreach (IPAddress ipa in host.AddressList)
-                    {
-                        if (ipa.AddressFamily == AddressFamily.InterNetwork)
-                        {
-                            localIP = ipa.ToString();
-                            Console.WriteLine(localIP);
-                        }
-                    }
-                    checkConnectTextView.Text = "True " + localIP;
-                }
-                else
-                {
-                    checkConnectTextView.Text = "False";
-                }
-            };
-
-        }
-        void InitCardsInfoPage()
-        {
-            Button button = FindViewById<Button>(Resource.Id.myButton);
-
-            button.Click += delegate
-            {
-                var imageIntent = new Intent();
-                imageIntent.SetType("text/xml");
-                imageIntent.SetAction(Intent.ActionGetContent);
-                StartActivityForResult(
-                    Intent.CreateChooser(imageIntent, "Select xml"), 0);
-            };
-
-        }
+  
         bool IsNeworkConnect()
         {
             ConnectivityManager connectivityManager = (ConnectivityManager)GetSystemService(Context.ConnectivityService);

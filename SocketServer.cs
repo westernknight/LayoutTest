@@ -12,7 +12,7 @@ namespace LayoutTest
 {
     class SocketServer : SocketConnection
     {
-        List<Socket> socketList = new List<Socket>();
+        public List<Socket> socketList = new List<Socket>();
         
         public void Start(int port)
         {

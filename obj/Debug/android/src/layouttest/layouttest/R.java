@@ -41,7 +41,9 @@ public final class R {
         public static final int layout1=0x7f030007;
         public static final int layout_row=0x7f030008;
         public static final int main=0x7f030009;
-        public static final int setting=0x7f03000a;
+        public static final int sessions=0x7f03000a;
+        public static final int sessions_row_inflate=0x7f03000b;
+        public static final int setting=0x7f03000c;
     }
     public static final class string {
         public static final int ApplicationName=0x7f040001;

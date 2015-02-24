@@ -149,7 +149,13 @@ namespace LayoutTest
 			public const int Main = 2130903049;
 			
 			// aapt resource value: 0x7f03000a
-			public const int setting = 2130903050;
+			public const int sessions = 2130903050;
+			
+			// aapt resource value: 0x7f03000b
+			public const int sessions_row_inflate = 2130903051;
+			
+			// aapt resource value: 0x7f03000c
+			public const int setting = 2130903052;
 			
 			static Layout()
 			{

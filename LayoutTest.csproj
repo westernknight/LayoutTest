@@ -74,7 +74,9 @@
     <Compile Include="Persion.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sessions.cs" />
     <Compile Include="SessionsActivity.cs" />
+    <Compile Include="SessionsAdapter.cs" />
     <Compile Include="SettingActivity.cs" />
     <Compile Include="SocketClient.cs" />
     <Compile Include="SocketConnection.cs" />
@@ -108,6 +110,12 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\console_output_row_inflate.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\sessions_row_inflate.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\sessions.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -21,7 +21,7 @@ namespace LayoutTest
     {
         LinearLayout principalview;
         LinearLayout.LayoutParams parametros = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, LinearLayout.LayoutParams.MatchParent);
-        FileStream sessionFile;
+       
         
         LitJson.JsonData sessionData;
         public static SessionsActivity instance;
@@ -42,8 +42,8 @@ namespace LayoutTest
             Console.WriteLine("++++++++++++++++++++++++++++++++++++++");
 
             FileInfo fi = new FileInfo(  Path.Combine(documents,  "sessions.txt"));
-
-            sessionFile = fi.Open(FileMode.OpenOrCreate);
+       
+            FileStream sessionFile = fi.Open(FileMode.OpenOrCreate);
             using (StreamReader sr = new StreamReader(sessionFile))
             {
                 string sessionJson = sr.ReadToEnd();
@@ -140,7 +140,7 @@ namespace LayoutTest
             var documents = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
 
             FileInfo fi = new FileInfo(Path.Combine(documents, "sessions.txt"));
-            sessionFile = fi.Open(FileMode.OpenOrCreate);
+            FileStream sessionFile = fi.Open(FileMode.OpenOrCreate);
             using (StreamWriter sw = new StreamWriter(sessionFile))
             {
                 sw.WriteLine(sessionData.ToJson());

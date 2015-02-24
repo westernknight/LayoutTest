@@ -30,7 +30,14 @@ namespace LayoutTest
             listView.Adapter = new OutputAdapter(this, items);
 
             Button bt = FindViewById<Button>(Resource.Id.button1);
-            bt.Click += (sender, e) => { Push(DateTime.Now.ToString()); };
+            bt.Click += (sender, e) => 
+            { 
+                Push(DateTime.Now.ToString());
+                for (int i = 0; i < Activity1.instance.sockerServer.socketList.Count; i++)
+                {
+                    Activity1.instance.sockerServer.SendPackage(i, "abc");
+                }
+            };
         }
         public void Clear()
         {

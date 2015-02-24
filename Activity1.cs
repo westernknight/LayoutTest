@@ -26,7 +26,7 @@ namespace LayoutTest
     {
         public static Activity1 instance;
         public bool gameStart = false;//OutputActivity控制
-        SocketServer sockerServer= new SocketServer();          
+        public SocketServer sockerServer= new SocketServer();          
         BackgroundWorker checkConnection = new BackgroundWorker();
         protected override void OnCreate(Bundle bundle)
         {
@@ -50,10 +50,7 @@ namespace LayoutTest
                     if (IsNeworkConnect() == true)
                     {
                         IPHostEntry host;
-                        string localIP = "?";
-                 
-
-
+                        string localIP = "?";   
                         host = Dns.GetHostEntry(Dns.GetHostName());
                         foreach (IPAddress ipa in host.AddressList)
                         {
@@ -63,6 +60,7 @@ namespace LayoutTest
 
                             }
                         }
+                        sockerServer.Start(5656);
                         //ipShow.Text = localIP;
                         RunOnUiThread(() => { ipShow.Text = localIP + " (" + sockerServer.socketList.Count+ ")"; });
                        
@@ -103,7 +101,7 @@ namespace LayoutTest
             //serverInfo = FindViewById<LinearLayout>(Resource.Id.linearLayout1);
             //cardsInfo = FindViewById<LinearLayout>(Resource.Id.linearLayout2);
 
-            sockerServer.Start(5656);
+            
 
             //             serverInfo.Click += (sender, e) =>
             //             {

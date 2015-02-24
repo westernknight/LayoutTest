@@ -10,18 +10,30 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace LayoutTest
 {
-    class SocketServer : SocketConnection
+    public class SocketServer : SocketConnection
     {
         public List<Socket> socketList = new List<Socket>();
-        
+        bool started = false;
         public void Start(int port)
         {
-
+            if (started == false)
+            {
+                started = true;                
+            }
+            else
+            {
+                return;
+            }
             try
             {
                 socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 socket.Bind(new IPEndPoint(IPAddress.Any, port));
                 socket.Listen(int.MaxValue);
+
+                socket.BeginAccept((ar) =>
+            {
+                AcceptCallback(ar);
+            }, socket);
 
                 Msg("server on line,wait for connection...");
             }
@@ -30,10 +42,6 @@ namespace LayoutTest
                 Msg(ex);
             }
 
-            socket.BeginAccept((ar) =>
-            {
-                AcceptCallback(ar);
-            }, socket);
         }
         private void AcceptCallback(IAsyncResult ar)
         {

@@ -15,6 +15,6 @@ namespace LayoutTest
         public int 出牌数量最小值 = 1;        
         public bool 牌堆2是否激活 = false; 
         public bool 混合牌堆1跟2 = false;
-               
+        public bool 循环发牌 = false;
     }
 }

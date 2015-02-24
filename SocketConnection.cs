@@ -7,7 +7,7 @@ using System.Net;
 
 namespace LayoutTest
 {
-    class SocketConnection
+    public class SocketConnection
     {
         protected Socket socket;
         protected byte[] tmpData = new byte[1000 * 1024];

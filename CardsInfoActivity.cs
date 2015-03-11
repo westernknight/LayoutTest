@@ -85,5 +85,17 @@ namespace LayoutTest
 
             }
         }
+        public CardsInfoAdapter GetPile(int pileindex)
+        {
+            if (pileindex==0)
+            {
+                return listView1.Adapter as CardsInfoAdapter;
+            }
+            else if (pileindex == 1)
+            {
+                return listView2.Adapter as CardsInfoAdapter;
+            }
+            return null;
+        }
     }
 }

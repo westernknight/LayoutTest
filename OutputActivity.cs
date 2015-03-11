@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using System.Collections;
 using System.Net.Sockets;
+using LitJson;
 
 namespace LayoutTest
 {
@@ -22,31 +23,30 @@ namespace LayoutTest
         List<string> lineContent = new List<string>();
         ListView listView;
 
-        Dictionary<int, string> cards1List = new Dictionary<int, string>();
-        Dictionary<int, string> cards2List = new Dictionary<int, string>();
-        const int pileList = 2;
-        List<int>[] cardsRest = new List<int>[pileList];
 
-        List<int>[] cardsSended = new List<int>[pileList];
-
-        List<int>[] cardsOuted = new List<int>[pileList];
+        List<CardInfo> cards = new List<CardInfo>();
 
 
-        public List<int> PlayerRequireCard(int pileIndex,int cardcount)//return json
+        List<string>[] cardsName = new List<string>[2];
+        List<CardInfo> cardsIdRest = new List<CardInfo>();
+
+        List<CardInfo> cardsOuted = new List<CardInfo>();
+
+
+
+        public List<CardInfo> PlayerRequireCard(int pileIndex, int cardcount)//return json
         {
-            List<string> cards1 = ((CardsInfoAdapter)(CardsInfoActivity.instance.listView1.Adapter)).GetCards();
-            cards1List.Clear();
-            for (int i = 0; i < cards1.Count; i++)
+            List<CardInfo> pileIndexRestCards = new List<CardInfo>();//
+            foreach (var item in cardsIdRest)
             {
-                cards1List.Add(i, cards1[i]);
+                if (item.pileIndex == pileIndex)
+                {
+                    if (CardsInfoActivity.instance.GetPile(pileIndex).GetCardChecked(item.id))
+                    {
+                        pileIndexRestCards.Add(item);
+                    }
+                }
             }
-            List<string> cards2 = ((CardsInfoAdapter)(CardsInfoActivity.instance.listView2.Adapter)).GetCards();
-            cards2List.Clear();
-            for (int i = 0; i < cards2.Count; i++)
-            {
-                cards2List.Add(i, cards2[i]);
-            }
-
 
             //获得所有可发的牌
             //判断是否能循环发牌
@@ -54,24 +54,28 @@ namespace LayoutTest
             Sessions ses = LitJson.JsonMapper.ToObject<Sessions>(SessionsActivity.instance.GetSessionJsonData().ToJson());
 
 
-            List<int> outcards = new List<int>();
+            List<CardInfo> requirecards = new List<CardInfo>();
 
             if (ses.循环发牌)
             {
                 Random ran = new Random();
                 for (int i = 0; i < cardcount; i++)
                 {
-                    if (cardsRest[pileIndex].Count == 0)
+                    if (pileIndexRestCards.Count == 0)
                     {
-                        for (int j = 0; j < cardsOuted[pileIndex].Count; j++)
+                        for (int j = 0; j < cardsOuted.Count; j++)
                         {
-                            cardsRest[pileIndex].Add(cardsOuted[pileIndex][j]);
+                            if (cardsOuted[j].pileIndex == pileIndex)
+                            {
+                                pileIndexRestCards.Add(cardsOuted[j]);
+                            }
+
                         }
-                        cardsOuted[pileIndex].Clear();
+                        cardsOuted.Clear();
                     }
-                    int cardindex = cardsRest[pileIndex][ran.Next(cardsRest[pileIndex].Count)];
-                    outcards.Add(cardindex);
-                    cardsSended[pileIndex].Add(cardindex);
+                    CardInfo card = pileIndexRestCards[ran.Next(pileIndexRestCards.Count)];
+                    requirecards.Add(card);
+
                 }
             }
             else
@@ -79,36 +83,93 @@ namespace LayoutTest
                 Random ran = new Random();
                 for (int i = 0; i < cardcount; i++)
                 {
-                    if (cardsRest[pileIndex].Count == 0)
+                    if (pileIndexRestCards.Count == 0)
                     {
                         break;
                     }
-                    int cardindex = cardsRest[pileIndex][ran.Next(cardsRest[pileIndex].Count)];
-                    outcards.Add(cardindex);
-                    cardsSended[pileIndex].Add(cardindex);
+                    CardInfo card = pileIndexRestCards[ran.Next(pileIndexRestCards.Count)];
+                    requirecards.Add(card);
+
                 }
 
             }
-            return outcards;
+            return requirecards;
         }
-        public void NetworkMsg(Socket ts,string json)
+        public void NetworkMsg(Socket ts, string json)
         {
+            Sessions ses = LitJson.JsonMapper.ToObject<Sessions>(SessionsActivity.instance.GetSessionJsonData().ToJson());
+
             Console.WriteLine(json);
             LitJson.JsonData data = LitJson.JsonMapper.ToObject(json);
-            if (((IDictionary)data).Contains("requirecards"))
+            if ((string)data["cmd"] == "requirecards")
             {
                 if (((IDictionary)data).Contains("pileindex"))
                 {
                     int pileindex = (int)data["pileindex"];
-                    int cardscount = (int)data["requirecards"];
-                    List<int> require = PlayerRequireCard(pileindex, cardscount);
+                    int cardscount = ses.发牌数;
+                    List<CardInfo> require = PlayerRequireCard(pileindex, cardscount);
                     string send = LitJson.JsonMapper.ToJson(require);
-                    Console.WriteLine("send: "+send);
-                    Activity1.instance.sockerServer.SendPackage(ts, send);
+                    Console.WriteLine("send: " + send);
+
+                    LitJson.JsonData callback = new LitJson.JsonData();
+                    callback["cmd"] = "requirecards_callback";
+                    callback["cards"] = (JsonMapper.ToJson(require));
+                    Activity1.instance.sockerServer.SendPackage(ts, callback.ToJson());
                 }
             }
-        }
+            else if ((string)data["cmd"] == "outcards")
+            {
+                List<CardInfo> ci = JsonMapper.ToObject<List<CardInfo>>((string)data["cards"]);
+                foreach (var item in ci)
+                {
+                    cardsOuted.Add(item);
+                }
+                List<Socket> otherClients = Activity1.instance.sockerServer.socketList;
 
+                LitJson.JsonData callback = new LitJson.JsonData();
+                callback["cmd"] = "outcards_callback";
+                callback["cards"] = (JsonMapper.ToJson(ci));
+                foreach (var item in otherClients)
+                {
+                    Activity1.instance.sockerServer.SendPackage(item, callback.ToJson());
+                }
+            }
+
+
+        }
+        public void NewGame()
+        {
+            cardsName[0] = ((CardsInfoAdapter)(CardsInfoActivity.instance.listView1.Adapter)).GetCards();
+
+
+            cardsName[1] = ((CardsInfoAdapter)(CardsInfoActivity.instance.listView2.Adapter)).GetCards();
+
+
+            cards.Clear();
+            cardsIdRest.Clear();
+            cardsOuted.Clear();
+
+            for (int i = 0; i < cardsName[0].Count; i++)
+            {
+                CardInfo ci = new CardInfo() { pileIndex = 0, id = i, name = cardsName[0][i] };
+                cards.Add(ci);
+                cardsIdRest.Add(ci);
+            }
+            for (int i = 0; i < cardsName[1].Count; i++)
+            {
+                CardInfo ci = new CardInfo() { pileIndex = 0, id = i, name = cardsName[1][i] };
+                cards.Add(ci);
+                cardsIdRest.Add(ci);
+            }
+
+
+            //send to client
+            List<Socket> clients = Activity1.instance.sockerServer.socketList;
+
+            LitJson.JsonData childJ = new LitJson.JsonData();
+            childJ["cmd"] = "newgame";
+            childJ["cards"] = JsonMapper.ToJson(cards);
+        }
         protected override void OnCreate(Bundle bundle)
         {
             instance = this;
@@ -126,9 +187,9 @@ namespace LayoutTest
             {
 
                 Push(DateTime.Now.ToString());
-                
+                NewGame();
             };
-            
+
 
         }
         public void Clear()

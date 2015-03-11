@@ -134,14 +134,28 @@ namespace LayoutTest
                     Activity1.instance.sockerServer.SendPackage(item, callback.ToJson());
                 }
             }
+            else if ((string)data["cmd"] == "newgame")
+            {
+                //send to client
+               
 
+                LitJson.JsonData callback = new LitJson.JsonData();
+                callback["cmd"] = "newgame_callback";
+                callback["init"] = JsonMapper.ToJson(cards);
+
+
+                List<CardInfo> require = PlayerRequireCard(0, ses.游戏开始手牌数量);
+                callback["cards"] = (JsonMapper.ToJson(require));
+                Activity1.instance.sockerServer.SendPackage(ts, callback.ToJson());
+
+            }
 
         }
         public void NewGame()
         {
+            Sessions ses = LitJson.JsonMapper.ToObject<Sessions>(SessionsActivity.instance.GetSessionJsonData().ToJson());
+
             cardsName[0] = ((CardsInfoAdapter)(CardsInfoActivity.instance.listView1.Adapter)).GetCards();
-
-
             cardsName[1] = ((CardsInfoAdapter)(CardsInfoActivity.instance.listView2.Adapter)).GetCards();
 
 
@@ -162,13 +176,14 @@ namespace LayoutTest
                 cardsIdRest.Add(ci);
             }
 
-
-            //send to client
             List<Socket> clients = Activity1.instance.sockerServer.socketList;
-
             LitJson.JsonData childJ = new LitJson.JsonData();
             childJ["cmd"] = "newgame";
-            childJ["cards"] = JsonMapper.ToJson(cards);
+            foreach (var item in clients)
+            {
+                Activity1.instance.sockerServer.SendPackage(item, childJ.ToJson());
+            }
+
         }
         protected override void OnCreate(Bundle bundle)
         {

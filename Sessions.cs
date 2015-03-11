@@ -17,4 +17,5 @@ namespace LayoutTest
         public bool 混合牌堆1跟2 = false;
         public bool 循环发牌 = false;
     }
+    
 }

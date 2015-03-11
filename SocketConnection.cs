@@ -12,7 +12,7 @@ namespace LayoutTest
         protected Socket socket;
         protected byte[] tmpData = new byte[1000 * 1024];
         public Action<string> msg_callback;
-        public Action<string> cmd_callback;
+        public Action<Socket,string> cmd_callback;
     
         protected void Msg(string msg)
         {
@@ -47,7 +47,7 @@ namespace LayoutTest
         {
             if (cmd_callback!=null)
             {
-                cmd_callback(Encoding.UTF8.GetString(body_data));
+                cmd_callback(ts,Encoding.UTF8.GetString(body_data));
                 
             }
         }

@@ -77,8 +77,8 @@ namespace LayoutTest
                 pileTwo = cc.GetPile(1);
 
 
-                ListView listView1 = FindViewById<ListView>(Resource.Id.listView1);
-                ListView listView2 = FindViewById<ListView>(Resource.Id.listView2);
+                listView1 = FindViewById<ListView>(Resource.Id.listView1);
+                listView2 = FindViewById<ListView>(Resource.Id.listView2);
 
                 listView1.Adapter = new CardsInfoAdapter(this, pileOne);
                 listView2.Adapter = new CardsInfoAdapter(this, pileTwo);

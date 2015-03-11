@@ -147,5 +147,9 @@ namespace LayoutTest
             }
             sessionFile.Close();
         }
+        public LitJson.JsonData GetSessionJsonData()
+        {
+            return sessionData;
+        }
     }
 }

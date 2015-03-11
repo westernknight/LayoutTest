@@ -101,12 +101,11 @@ namespace LayoutTest
                 Msg(ex);
             }
         }
-   
-        public void SendPackage(int socketid,string jsonData)
+
+        public void SendPackage(Socket socket, string jsonData)
         {
             try
             {
-                Socket socket = socketList[socketid];
                 if (socket != null)
                 {
                     if (socket.Connected)

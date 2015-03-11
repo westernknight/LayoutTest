@@ -63,6 +63,9 @@ namespace LayoutTest
             return false;
 
         }
-
+        public List<string> GetCards()
+        {
+            return items;
+        }
     }
 }

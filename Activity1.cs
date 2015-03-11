@@ -61,6 +61,7 @@ namespace LayoutTest
                             }
                         }
                         sockerServer.Start(5656);
+                        sockerServer.cmd_callback += OutputActivity.instance.NetworkMsg;
                         //ipShow.Text = localIP;
                         RunOnUiThread(() => { ipShow.Text = localIP + " (" + sockerServer.socketList.Count+ ")"; });
                        

@@ -179,6 +179,7 @@ namespace LayoutTest
             List<Socket> clients = Activity1.instance.sockerServer.socketList;
             LitJson.JsonData childJ = new LitJson.JsonData();
             childJ["cmd"] = "newgame";
+            childJ["sessions"] = JsonMapper.ToJson(ses);
             foreach (var item in clients)
             {
                 Activity1.instance.sockerServer.SendPackage(item, childJ.ToJson());
@@ -200,7 +201,7 @@ namespace LayoutTest
             //按下开始按钮
             bt.Click += (sender, e) =>
             {
-
+                Clear();
                 Push(DateTime.Now.ToString());
                 NewGame();
             };
